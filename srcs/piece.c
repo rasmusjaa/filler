@@ -6,7 +6,7 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 22:58:29 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/06/24 00:25:47 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/06/24 01:35:04 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ int	try_piece(t_filler *fil, int y, int x)
 		i++;
 	}
 	if (touching == 1)
-	{
-		ft_dprintf(2, "possible to %d %d score %d\n", y, x, score);
 		return (score);
-	}
 	return (-1);
 }
 
@@ -61,9 +58,11 @@ int		set_piece(t_filler *fil)
 	int 	i;
 	int 	j;
 	int 	score;
-	int 	lowest[3];
+	int scores;
+	int lowest[3];
 
 	i = 0;
+	scores = 0;
 	lowest[0] = 0;
 	while (i - fil->piece_min_y < fil->height - fil->piece_max_y)
 	{
@@ -73,6 +72,7 @@ int		set_piece(t_filler *fil)
 			score = try_piece(fil, i - fil->piece_min_y, j - fil->piece_min_x);
 			if (score > 0)
 			{
+				scores++;
 				if (score < lowest[0] || lowest[0] == 0)
 				{
 					lowest[0] = score;
@@ -84,10 +84,10 @@ int		set_piece(t_filler *fil)
 		}
 		i++;
 	}
+//	ft_dprintf(2, "possible moves: %d\n", scores);
 	if (lowest[0] > 0)
 	{
-		ft_dprintf(2, "lowest %d %d score %d\n", lowest[1], lowest[2], lowest[0]);
-	//	if (fil->pieces == 2)
+//		ft_dprintf(2, "best place y %d, x %d, score %d\n", lowest[1], lowest[2], lowest[0]);
 	//		while(1);
 	//	sleep(1);
 		ft_printf("%d %d\n", lowest[1], lowest[2]);
@@ -95,8 +95,8 @@ int		set_piece(t_filler *fil)
 	}
 	else
 	{
-		ft_dprintf(2, "can't\n");
-		while (1);
+//		ft_dprintf(2, "No possible move\n");
+//		while (1);
 		ft_printf("%d %d\n", 0, 0);
 		return (0);
 	}
@@ -134,8 +134,7 @@ int			fill_piece(t_filler *fil)
 	row = 0;
 	while (row < fil->piece_height && ft_get_next_line(0, &line) > 0)
 	{
-		if (fill_piece_row(fil, row, line))
-			return (1);
+		fill_piece_row(fil, row, line);
 		ft_strdel(&line);
 		row++;
 	}

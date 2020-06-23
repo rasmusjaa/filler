@@ -6,7 +6,7 @@
 #    By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2020/06/22 19:13:35 by rjaakonm         ###   ########.fr        #
+#    Updated: 2020/06/24 01:41:53 by rjaakonm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,4 +52,4 @@ re: fclean all
 
 run:
 	gcc $(FLAGS) $(INCL) $(SRCS) $(LIB) -o $(NAME) -O2
-	./filler_vm -f maps/map00 -p1 ./rjaakonm.filler -p2 ./npimenof.filler
+	./filler_vm -f maps/map01 -p1 ./rjaakonm.filler -p2 ./npimenof.filler

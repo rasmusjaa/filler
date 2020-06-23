@@ -6,7 +6,7 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 22:58:29 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/06/24 00:25:20 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/06/24 01:35:47 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void		rate_grid(t_filler *fil)
 		{
 			if (fil->grid[i][j] == 0)
 				fil->grid[i][j] = find_closest_opp(fil, i, j);
+			// tas voi huvikseen laskee molempien pojot ja tyhjat
 			j++;
 		}
 		i++;
@@ -94,8 +95,7 @@ int			fill_grid(t_filler *fil)
 		temp = line;
 		while ((*line >= '0' && *line <= '9') || *line == ' ')
 			line++;
-		if (fill_row(fil, row, line))
-			return (1);
+		fill_row(fil, row, line);
 		ft_strdel(&temp);
 		row++;
 	}
