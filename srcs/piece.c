@@ -6,7 +6,7 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 22:58:29 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/06/22 18:54:35 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/06/24 00:25:47 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,19 @@ int	try_piece(t_filler *fil, int y, int x)
 						return (-1);
 				}
 				else
+				{
 					score += fil->grid[y + i][x + j];
+				}
 			}
 			j++;
 		}
 		i++;
 	}
 	if (touching == 1)
+	{
+		ft_dprintf(2, "possible to %d %d score %d\n", y, x, score);
 		return (score);
+	}
 	return (-1);
 }
 
@@ -79,17 +84,19 @@ int		set_piece(t_filler *fil)
 		}
 		i++;
 	}
-	ft_dprintf(2, "lowest %d %d score %d\n", lowest[1], lowest[2], lowest[0]);
 	if (lowest[0] > 0)
 	{
-	//	while(1);
+		ft_dprintf(2, "lowest %d %d score %d\n", lowest[1], lowest[2], lowest[0]);
+	//	if (fil->pieces == 2)
+	//		while(1);
+	//	sleep(1);
 		ft_printf("%d %d\n", lowest[1], lowest[2]);
 		return (0);
 	}
 	else
 	{
 		ft_dprintf(2, "can't\n");
-	//	while (1);
+		while (1);
 		ft_printf("%d %d\n", 0, 0);
 		return (0);
 	}

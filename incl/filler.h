@@ -6,7 +6,7 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 16:07:52 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/06/22 18:34:55 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/06/24 00:25:25 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ typedef struct	s_filler
 {
 	char	player;
 	char	opp;
-	int *opp_x;
-	int *opp_y;
 	int height;
 	int		width;
 	int		**grid;
 	int 	best_x;
 	int		best_y;
 	int		**piece;
-	int		piece_width;
+	int pieces;
+	int piece_width;
 	int		piece_height;
 	int		piece_min_y;
 	int		piece_max_y;

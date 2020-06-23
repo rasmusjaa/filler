@@ -6,7 +6,7 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 16:05:02 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/06/22 18:09:24 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/06/24 00:25:32 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_filler	*init()
 	fil->grid = NULL;
 	fil->width = 0;
 	fil->height = 0;
+	fil->pieces = 0;
 	fil->piece_width = 0;
 	fil->piece_height = 0;
 	fil->piece_min_y = -1;
@@ -48,8 +49,6 @@ int			free_all(t_filler *fil)
 		row++;
 	}
 	free(fil->piece);
-	free(fil->opp_y);
-	free(fil->opp_x);
 	free(fil);
 	return (0);
 }
@@ -70,12 +69,17 @@ int			game_loop(t_filler *fil)
 		{
 			if (read_grid(fil, &line[8]))
 				return(1);
+		//	ft_dprintf(2, "GRID before\n");
+		//	print_int_grid(fil->grid, fil->height, fil->width);
+			ft_dprintf(2, "GRID before\n");
+			print_int_grid(fil->grid, fil->height, fil->width);
 			rate_grid(fil);
 			ft_dprintf(2, "GRID\n");
 			print_int_grid(fil->grid, fil->height, fil->width);
 		}
 		else if (ft_strncmp("Piece", line, 5) == 0)
 		{
+			fil->pieces++;
 			if (read_piece(fil, &line[6]))
 				return(1);
 			ft_dprintf(2, "PIECE\n");

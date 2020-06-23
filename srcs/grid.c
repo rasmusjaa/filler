@@ -6,7 +6,7 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 22:58:29 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/06/22 18:40:44 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/06/24 00:25:20 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,28 @@ int	find_closest_opp(t_filler *fil, int y, int x)
 {
 	int i;
 	int j;
+	int d;
+	int	closest;
 
+	closest = 0;
 	i = 0;
-	j = 0;
-	while (y + i < fil->height || y - i >= 0)
+	while (i < fil->height)
 	{
-		if (fil->opp_y[y + i] < fil->height && fil->opp_y[y + i] == 1)
-			break;
-		if (fil->opp_y[y - i] >= 0 && fil->opp_y[y - i] == 1)
-			break;
+		j = 0;
+		while (j < fil->width)
+		{
+			if (fil->grid[i][j] == -2)
+			{
+				d = i > y ? i - y : y - i;
+				d += j > x ? j - x : x - j;
+				if (d < closest || closest == 0)
+					closest = d;
+			}
+			j++;
+		}
 		i++;
 	}
-	while (x + j < fil->width || x - j >= 0)
-	{
-		if (fil->opp_x[x + j] < fil->width && fil->opp_x[x + j] == 1)
-			break;
-		if (fil->opp_x[x - j] >= 0 && fil->opp_x[x - j] == 1)
-			break;
-		j++;
-	}
-	return (i + j);
+	return (closest);
 }
 
 void		rate_grid(t_filler *fil)
@@ -70,30 +72,12 @@ int			fill_row(t_filler *fil, int row, char *line)
 		else if (line[column] == fil->opp || line[column] == fil->opp + 32)
 		{
 			fil->grid[row][column] = -2;
-			fil->opp_x[column] = 1;
-			fil->opp_y[row] = 1;
 		}
+		else
+			fil->grid[row][column] = 0;
 		column++;
 	}
 	return (0);
-}
-
-void	init_opp_coord(t_filler *fil)
-{
-	int i;
-
-	i = 0;
-	while (i < fil->width)
-	{
-		fil->opp_x[i] = 0;
-		i++;
-	}
-	i = 0;
-	while (i < fil->height)
-	{
-		fil->opp_y[i] = 0;
-		i++;
-	}
 }
 
 int			fill_grid(t_filler *fil)
@@ -131,10 +115,6 @@ int			read_grid(t_filler *fil, char *line)
 			return (1);
 		if (!(fil->grid = int_grid(fil->width, fil->height)))
 			return (1);
-		if (!(fil->opp_x = (int *)malloc(sizeof(int) * fil->width))
-			|| !(fil->opp_y = (int *)malloc(sizeof(int) * fil->height)))
-			return (1);
-		init_opp_coord(fil);
 	}
 	if (fill_grid(fil))
 		return (1);
