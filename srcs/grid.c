@@ -6,13 +6,13 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 22:58:29 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/06/24 01:35:47 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/07/01 15:41:22 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int	find_closest_opp(t_filler *fil, int y, int x)
+int			find_closest_opp(t_filler *fil, int y, int x)
 {
 	int i;
 	int j;
@@ -42,10 +42,12 @@ int	find_closest_opp(t_filler *fil, int y, int x)
 
 void		rate_grid(t_filler *fil)
 {
-	int 	i;
-	int 	j;
+	int	i;
+	int	j;
 
 	i = 0;
+	fil->my_score = 0;
+	fil->enemy_score = 4;
 	while (i < fil->height)
 	{
 		j = 0;
@@ -53,7 +55,6 @@ void		rate_grid(t_filler *fil)
 		{
 			if (fil->grid[i][j] == 0)
 				fil->grid[i][j] = find_closest_opp(fil, i, j);
-			// tas voi huvikseen laskee molempien pojot ja tyhjat
 			j++;
 		}
 		i++;
@@ -62,14 +63,15 @@ void		rate_grid(t_filler *fil)
 
 int			fill_row(t_filler *fil, int row, char *line)
 {
-	int 	column;
+	int	column;
 
 	column = 0;
-
 	while (column < fil->width)
 	{
 		if (line[column] == fil->player || line[column] == fil->player + 32)
+		{
 			fil->grid[row][column] = -1;
+		}
 		else if (line[column] == fil->opp || line[column] == fil->opp + 32)
 		{
 			fil->grid[row][column] = -2;

@@ -6,7 +6,7 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 16:07:52 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/06/24 00:48:49 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/07/01 17:14:29 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ typedef struct	s_filler
 	int		piece_max_y;
 	int		piece_min_x;
 	int		piece_max_x;
+	int		my_score;
+	int		enemy_score;
 } t_filler;
 
 int		**int_grid(int width, int height);
 void	print_int_grid(int **grid, int height, int width);
-
+void	print_info(t_filler *fil);
 int		read_player(t_filler *fil, int n);
 
 void	rate_grid(t_filler *fil);

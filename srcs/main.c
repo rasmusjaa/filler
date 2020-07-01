@@ -6,13 +6,13 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 16:05:02 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/06/24 01:40:59 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/07/01 17:16:32 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-t_filler	*init()
+t_filler	*init(void)
 {
 	t_filler *fil;
 
@@ -72,29 +72,18 @@ int			game_loop(t_filler *fil)
 		if (ft_strncmp("$$$", line, 3) == 0)
 		{
 			if (read_player(fil, ft_atoi(&line[10])))
-				return(1);
+				return (1);
 		}
 		else if (ft_strncmp("Plateau", line, 7) == 0)
 		{
 			if (read_grid(fil, &line[8]))
-				return(1);
-		//	ft_dprintf(2, "GRID before\n");
-		//	print_int_grid(fil->grid, fil->height, fil->width);
-			// ft_dprintf(2, "GRID before\n");
-			// print_int_grid(fil->grid, fil->height, fil->width);
+				return (1);
 			rate_grid(fil);
-			// ft_dprintf(2, "GRID\n");
-			// print_int_grid(fil->grid, fil->height, fil->width);
 		}
 		else if (ft_strncmp("Piece", line, 5) == 0)
 		{
-			fil->pieces++;
 			if (read_piece(fil, &line[6]))
-				return(1);
-			// ft_dprintf(2, "PIECE\n");
-			// print_int_grid(fil->piece, fil->piece_height, fil->piece_width);
-			// ft_dprintf(2, "min y%d x%d\n", fil->piece_min_y, fil->piece_min_x);
-			// ft_dprintf(2, "max y%d x%d\n", fil->piece_max_y, fil->piece_max_x);
+				return (1);
 			set_piece(fil);
 			free_piece(fil);
 		}
@@ -106,9 +95,9 @@ int			game_loop(t_filler *fil)
 int			main(void)
 {
 	t_filler	*fil;
-	int 		ret;
+	int			ret;
 
-	ret = 0; //return value if needed
+	ret = 0;
 	if (!(fil = init()))
 		return (1);
 	if (game_loop(fil) == 1)
@@ -116,5 +105,3 @@ int			main(void)
 	free_all(fil, ret);
 	return (ret);
 }
-// isompi bufferi?
-// kartan ja piecen validointi jos muita merkkeja kun pisteet ja pelaajat?

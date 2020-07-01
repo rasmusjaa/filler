@@ -6,18 +6,18 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 22:58:29 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/06/24 01:35:04 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/07/01 17:19:35 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int	try_piece(t_filler *fil, int y, int x)
+int		try_piece(t_filler *fil, int y, int x)
 {
-	int 	i;
-	int 	j;
-	int 	touching;
-	int 	score;
+	int	i;
+	int	j;
+	int	touching;
+	int	score;
 
 	touching = 0;
 	score = 0;
@@ -29,9 +29,8 @@ int	try_piece(t_filler *fil, int y, int x)
 		{
 			if (fil->piece[i][j] == 1)
 			{
-				if ((y + i >= fil->height) || (x + j >= fil->width))
-					return (-1);
-				else if (fil->grid[y + i][x + j] == -2)
+				if ((y + i >= fil->height) || (x + j >= fil->width)
+						|| (fil->grid[y + i][x + j] == -2))
 					return (-1);
 				else if (fil->grid[y + i][x + j] == -1)
 				{
@@ -40,9 +39,7 @@ int	try_piece(t_filler *fil, int y, int x)
 						return (-1);
 				}
 				else
-				{
 					score += fil->grid[y + i][x + j];
-				}
 			}
 			j++;
 		}
@@ -55,9 +52,9 @@ int	try_piece(t_filler *fil, int y, int x)
 
 int		set_piece(t_filler *fil)
 {
-	int 	i;
-	int 	j;
-	int 	score;
+	int	i;
+	int	j;
+	int	score;
 	int scores;
 	int lowest[3];
 
@@ -84,27 +81,16 @@ int		set_piece(t_filler *fil)
 		}
 		i++;
 	}
-//	ft_dprintf(2, "possible moves: %d\n", scores);
 	if (lowest[0] > 0)
-	{
-//		ft_dprintf(2, "best place y %d, x %d, score %d\n", lowest[1], lowest[2], lowest[0]);
-	//		while(1);
-	//	sleep(1);
 		ft_printf("%d %d\n", lowest[1], lowest[2]);
-		return (0);
-	}
 	else
-	{
-//		ft_dprintf(2, "No possible move\n");
-//		while (1);
 		ft_printf("%d %d\n", 0, 0);
-		return (0);
-	}
+	return (0);
 }
 
-int			fill_piece_row(t_filler *fil, int row, char *line)
+int		fill_piece_row(t_filler *fil, int row, char *line)
 {
-	int 	column;
+	int	column;
 
 	column = 0;
 	while (column < fil->piece_width)
@@ -126,7 +112,7 @@ int			fill_piece_row(t_filler *fil, int row, char *line)
 	return (0);
 }
 
-int			fill_piece(t_filler *fil)
+int		fill_piece(t_filler *fil)
 {
 	char	*line;
 	int		row;
@@ -141,7 +127,7 @@ int			fill_piece(t_filler *fil)
 	return (0);
 }
 
-int			read_piece(t_filler *fil, char *line)
+int		read_piece(t_filler *fil, char *line)
 {
 	fil->piece_min_y = -1;
 	fil->piece_max_y = -1;

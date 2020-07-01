@@ -6,7 +6,7 @@
 #    By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2020/06/24 01:41:53 by rjaakonm         ###   ########.fr        #
+#    Updated: 2020/07/01 17:03:39 by rjaakonm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,6 @@ NAME = rjaakonm.filler
 SRCS =	srcs/grid.c \
 		srcs/main.c \
 		srcs/piece.c \
-		srcs/player.c \
 		srcs/utilities.c \
 
 
@@ -52,4 +51,4 @@ re: fclean all
 
 run:
 	gcc $(FLAGS) $(INCL) $(SRCS) $(LIB) -o $(NAME) -O2
-	./filler_vm -f maps/map01 -p1 ./rjaakonm.filler -p2 ./npimenof.filler
+	./filler_vm -p1 ./rjaakonm.filler -p2 ./players/grati.filler -v -f maps/map01
