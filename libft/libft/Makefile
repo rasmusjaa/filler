@@ -6,7 +6,7 @@
 #    By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/19 17:57:45 by rjaakonm          #+#    #+#              #
-#    Updated: 2020/05/29 19:26:31 by rjaakonm         ###   ########.fr        #
+#    Updated: 2020/07/01 18:23:16 by rjaakonm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,7 @@ all: $(NAME)
 $(NAME):
 	@gcc $(FLAGS) -I $(INCL) -c $(SRCS)
 	@ar rc $(NAME) $(notdir $(OBJS))
-	ranlib $(NAME)
+	@ranlib $(NAME)
 
 clean:
 	@rm -f $(notdir $(OBJS))
