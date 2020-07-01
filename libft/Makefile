@@ -6,7 +6,7 @@
 #    By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/07 15:06:49 by rjaakonm          #+#    #+#              #
-#    Updated: 2020/05/29 19:23:57 by rjaakonm         ###   ########.fr        #
+#    Updated: 2020/07/01 18:21:04 by rjaakonm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ $(NAME): libftmake
 	@cp libft/libft.a $(NAME)
 	@gcc $(FLAGS) $(INCL) -c $(SRCS)
 	@ar rc $(NAME) $(notdir $(OBJS))
-	ranlib $(NAME)
+	@ranlib $(NAME)
 
 libftmake:
 	@make -C libft

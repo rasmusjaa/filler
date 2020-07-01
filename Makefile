@@ -6,7 +6,7 @@
 #    By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/01 15:48:04 by rjaakonm          #+#    #+#              #
-#    Updated: 2020/07/01 17:03:39 by rjaakonm         ###   ########.fr        #
+#    Updated: 2020/07/01 18:20:42 by rjaakonm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,7 @@ LIB = -L libft -lft
 all: $(NAME)
 
 $(NAME): libftmake
-	@echo "Creating filler"
-	gcc $(FLAGS) $(INCL) $(SRCS) $(LIB) -o $(NAME) -O2
-	@echo "Filler done"
+	@gcc $(FLAGS) $(INCL) $(SRCS) $(LIB) -o $(NAME) -O2
 
 libftmake:
 	@make -C libft
