@@ -6,7 +6,7 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 23:01:15 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/07/01 15:42:52 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/07/01 17:49:32 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,36 @@ void		print_int_grid(int **grid, int height, int width)
 	}
 }
 
-void		print_info(t_filler *fil)
-{
-	ft_dprintf(2, "My score %d, opponent score %d\n",
-		fil->my_score, fil->enemy_score);
-}
-
 int			read_player(t_filler *fil, int n)
 {
 	if (n != 1 && n != 2)
 		return (1);
 	fil->player = n == 1 ? 'O' : 'X';
 	fil->opp = n == 1 ? 'X' : 'O';
+	return (0);
+}
+
+void		check_lowest_score(t_filler *fil, int score, int i, int j)
+{
+	if (score < fil->lowest[0] || fil->lowest[0] == 0)
+	{
+		fil->lowest[0] = score;
+		fil->lowest[1] = i - fil->piece_min_y;
+		fil->lowest[2] = j - fil->piece_min_x;
+	}
+}
+
+int			try_piece_on_spot(t_filler *fil, int y, int x)
+{
+	if ((y >= fil->height) || (x >= fil->width) || (fil->grid[y][x] == -2))
+		return (-1);
+	else if (fil->grid[y][x] == -1)
+	{
+		fil->touching++;
+		if (fil->touching == 2)
+			return (-1);
+	}
+	else
+		fil->score += fil->grid[y][x];
 	return (0);
 }

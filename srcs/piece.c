@@ -6,7 +6,7 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 22:58:29 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/07/01 17:19:35 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/07/01 17:48:59 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ int		try_piece(t_filler *fil, int y, int x)
 {
 	int	i;
 	int	j;
-	int	touching;
-	int	score;
+	int	ret;
 
-	touching = 0;
-	score = 0;
+	fil->touching = 0;
+	fil->score = 0;
 	i = 0;
 	while (i < fil->piece_height)
 	{
@@ -28,25 +27,15 @@ int		try_piece(t_filler *fil, int y, int x)
 		while (j < fil->piece_width)
 		{
 			if (fil->piece[i][j] == 1)
-			{
-				if ((y + i >= fil->height) || (x + j >= fil->width)
-						|| (fil->grid[y + i][x + j] == -2))
-					return (-1);
-				else if (fil->grid[y + i][x + j] == -1)
-				{
-					touching++;
-					if (touching == 2)
-						return (-1);
-				}
-				else
-					score += fil->grid[y + i][x + j];
-			}
+				ret = try_piece_on_spot(fil, y + i, x + j);
+			if (ret == -1)
+				return (-1);
 			j++;
 		}
 		i++;
 	}
-	if (touching == 1)
-		return (score);
+	if (fil->touching == 1)
+		return (fil->score);
 	return (-1);
 }
 
@@ -54,13 +43,10 @@ int		set_piece(t_filler *fil)
 {
 	int	i;
 	int	j;
-	int	score;
-	int scores;
-	int lowest[3];
+	int score;
 
 	i = 0;
-	scores = 0;
-	lowest[0] = 0;
+	fil->lowest[0] = 0;
 	while (i - fil->piece_min_y < fil->height - fil->piece_max_y)
 	{
 		j = 0;
@@ -68,21 +54,13 @@ int		set_piece(t_filler *fil)
 		{
 			score = try_piece(fil, i - fil->piece_min_y, j - fil->piece_min_x);
 			if (score > 0)
-			{
-				scores++;
-				if (score < lowest[0] || lowest[0] == 0)
-				{
-					lowest[0] = score;
-					lowest[1] = i - fil->piece_min_y;
-					lowest[2] = j - fil->piece_min_x;
-				}
-			}
+				check_lowest_score(fil, score, i, j);
 			j++;
 		}
 		i++;
 	}
-	if (lowest[0] > 0)
-		ft_printf("%d %d\n", lowest[1], lowest[2]);
+	if (fil->lowest[0] > 0)
+		ft_printf("%d %d\n", fil->lowest[1], fil->lowest[2]);
 	else
 		ft_printf("%d %d\n", 0, 0);
 	return (0);

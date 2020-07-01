@@ -6,7 +6,7 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 22:58:29 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/07/01 15:41:22 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/07/01 17:47:09 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ void		rate_grid(t_filler *fil)
 	int	j;
 
 	i = 0;
-	fil->my_score = 0;
-	fil->enemy_score = 4;
 	while (i < fil->height)
 	{
 		j = 0;

@@ -6,7 +6,7 @@
 /*   By: rjaakonm <rjaakonm@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 16:05:02 by rjaakonm          #+#    #+#             */
-/*   Updated: 2020/07/01 17:16:32 by rjaakonm         ###   ########.fr       */
+/*   Updated: 2020/07/01 17:30:29 by rjaakonm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_filler	*init(void)
 	fil->grid = NULL;
 	fil->width = 0;
 	fil->height = 0;
-	fil->pieces = 0;
 	fil->piece_width = 0;
 	fil->piece_height = 0;
 	fil->piece_min_y = -1;
